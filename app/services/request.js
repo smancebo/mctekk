@@ -27,7 +27,9 @@ export default async function request(url, config = {}, method = 'GET') {
     })
     .catch(e => {
       if (!e.response) throw new Error('NO_RESPONSE_FROM_SERVER');
-      const { message } = e.response.data;
+      
+      const { message } = e.response.data.errors;
+      console.log(message)
       const { status } = e.response;
       if (status === 500) throw new Error('INTERNAL_SERVER_ERROR');
       throw new Error(message);

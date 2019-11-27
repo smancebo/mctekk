@@ -9,10 +9,10 @@ import validate from 'validate.js';
 const LoginForm = styled.View`
   padding: 24px;
   flex: 1;
-  
+  padding-top: 60px
 `;
 
-var constraints = {
+const constraints = {
   email: {
     presence: { message: '^email is required', allowEmpty: false }
    
@@ -39,13 +39,16 @@ class Login extends React.Component{
       const errors = validate(this.state, constraints);
       if(!errors){
         const { email, password } = this.state;
+        this.props.loading(true)
         const { token } = await UserService.authenticate({ email, password })
+        this.props.loading(false)
         AsyncStorage.setItem('token', token)
         this.props.navigation.navigate('Users')
       }else {
         this.setState({ errors })
       }
     }catch(e){
+      this.props.loading(false)
       Alert.alert(e.message)
     }
    
@@ -57,6 +60,10 @@ class Login extends React.Component{
     })
   }
 
+  onRegisterPressed = () => {
+    this.props.navigation.navigate('Register')
+  }
+
   render(){
     return (
       <LoginForm>
@@ -64,6 +71,7 @@ class Login extends React.Component{
           errors={this.state.errors}
           onFormChanged={this.onFormChanged}
           onLoginPressed={this.onLoginPressed}
+          onRegisterPressed={this.onRegisterPressed}
         />
       </LoginForm>
     )

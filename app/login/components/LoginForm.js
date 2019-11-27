@@ -1,38 +1,23 @@
 import React from 'react';
 import { View, Button, Text, TextInput } from 'react-native';
 import styled from 'styled-components/native';
+import { COLORS, FieldContainer, Label, Error, Input } from '../../shared';
 
 
-
-const FieldContainer = styled.View`
-  flex-direction: column;
-  margin-bottom: 16px
-`;
-
-const Label = styled.Text`
-  font-size: 12px;
-  font-weight: 800;
-  margin-bottom: 8;
-`;  
-const Error = styled.Text`
-  font-size: 10px;
-  
-  margin-bottom: 8;
-  color: red;
-  margin-top: 4px
-`;  
-
-const Input = styled.TextInput`
-  border-width: 1px;
-  border-color: #999;
-  height: 40px;
-  border-radius: 4px;
-  padding-horizontal: 8
+const RegisterButton = styled.Text`
+  color: ${COLORS.BLUE_TEXT};
+  text-decoration-line: underline;
+  text-align: center
 `;
 
 const LoginForm = (props) => {
 
-  const { onLoginPressed, onFormChanged, errors = {} } = props;
+  const { 
+    onLoginPressed, 
+    onFormChanged, 
+    errors = {},
+    onRegisterPressed 
+  } = props;
 
   return (
     <View>
@@ -54,7 +39,12 @@ const LoginForm = (props) => {
         />
         <Error>{errors.password}</Error>
       </FieldContainer>
-      <Button title='Login' onPress={onLoginPressed} />
+      <FieldContainer>
+        <Button title='Login' onPress={onLoginPressed} />
+      </FieldContainer>
+      <FieldContainer>
+        <RegisterButton onPress={onRegisterPressed}>Register</RegisterButton>
+      </FieldContainer>
     </View>
   )
 }

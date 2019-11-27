@@ -8,6 +8,10 @@ import { UserService } from '../../services';
 
 export default class Users extends React.Component{
 
+
+  static navigationOptions = () => ({
+    title: 'Users'
+  })
   state = {
     items: []
   }

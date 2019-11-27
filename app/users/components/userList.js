@@ -31,7 +31,7 @@ const UserList = (props) => {
     <FlatList {...props}
       style={{width: '100%'}}
       data={items}
-      keyExtractor={(item, index) => index}
+      keyExtractor={(item, index) => `${index}`}
       renderItem={({item}) => <UserItem item={item} />} 
     />
   )

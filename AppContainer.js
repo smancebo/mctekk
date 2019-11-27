@@ -1,12 +1,23 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { Login } from './app/login';
-import { Users } from './app/users'
+import { Users } from './app/users';
+import { Register } from './app/register';
+import { withLoading } from './app/shared';
+
+
+const RegisterStack = createStackNavigator({
+  Register: { screen: withLoading(Register) }
+},{
+  initialRouteName: 'Register'
+})
 
 const AuthStack = createStackNavigator({
-  Login: { screen: Login }
+  Login: { screen: withLoading(Login) },
+  RegisterStack
 },{
-  initialRouteName: 'Login'
+  initialRouteName: 'Login',
+  headerMode: 'none'
 })
 
 const AppStack = createStackNavigator({

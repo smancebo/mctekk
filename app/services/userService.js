@@ -11,9 +11,13 @@ function authenticate(user){
 function getAllUsers(){
   return request(`${HOST}/users`, {}, 'GET')
 }
+function register(user){
+  return request(`${HOST}/users`, {data: user}, 'POST')
+}
 
 
 export default {
   authenticate,
-  getAllUsers
+  getAllUsers,
+  register
 }
