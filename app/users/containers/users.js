@@ -23,7 +23,7 @@ export default class Users extends React.Component{
   render(){
     const { items = [] } = this.state;
     return (
-      <View>
+      <View style={{padding: 24, flex: 1, width: '100%'}}>
         <UserList 
           items={items}
         />

@@ -4,18 +4,24 @@ import styled from 'styled-components/native';
 
 const NameLabel = styled.Text`
   color: #000;
-  font-weigth: 800;
+  font-weight: 800;
 `
 const EmailLabel = styled.Text`
   color: #999;
 `
 
+const UserItemContainer = styled.View`
+  border-bottom-width: 1px;
+  border-color: #999;
+  padding-vertical: 16px
+`;
+
 const UserItem = ({item}) => {
   return (
-    <View>
-      <NameLabel>{`${item.firstName} ${item.lastName}`}</NameLabel>
+    <UserItemContainer style={{flex: 1}}>
+      <NameLabel>{`${item.firstname} ${item.lastname}`}</NameLabel>
       <EmailLabel>{`${item.email}`}</EmailLabel>
-    </View>
+    </UserItemContainer>
   )
 }
 
@@ -24,8 +30,9 @@ const UserList = (props) => {
   return (
     <FlatList {...props}
       style={{width: '100%'}}
-      items={items}
-      renderItem={({item, index}) => <UserItem item={item} /> }
+      data={items}
+      keyExtractor={(item, index) => index}
+      renderItem={({item}) => <UserItem item={item} />} 
     />
   )
 }
